@@ -65,7 +65,7 @@ class BackendUser {
   static async signOut(ctx) {
     ctx.session.user = null;
     return ctx.redirect('/');
-    // return ctx.render('login', { title: 'SInn管理平台'});
+    // return ctx.render('login', {});
   }
 
 }

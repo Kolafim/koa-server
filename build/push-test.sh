@@ -6,4 +6,4 @@
 # 示例： docker login --username=myusername registry.cn-hangzhou.aliyuncs.com
 # 如果你使用官方Docker Hub的仓库，登录只需要执行: docker login -u 用户名 -p 密码
 
-docker push registry.cn-hangzhou.aliyuncs.com/sessionboy/sinn:v2
+docker push registry.cn-hangzhou.aliyuncs.com/kolafim/grape:v2

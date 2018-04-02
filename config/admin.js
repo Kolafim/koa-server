@@ -4,6 +4,6 @@
 */
 const md5 = require('md5');
 module.exports = {
-	name: 'sinn',
+	name: 'grape',
 	password: md5('admin')
 }

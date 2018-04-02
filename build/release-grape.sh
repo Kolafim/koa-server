@@ -7,8 +7,8 @@
 # @ -d 以守护进程方式运行
 # @ -e 'NODE_ENV=production' 指定NODE_ENV环境变量为production
 # @ --restart=always 程序奔溃时重新启动
-# @ registry.cn-guangzhou.aliyuncs.com/s/sinn:v1  // 冒号前为镜像名称，后是标签，也可以理解为版本号
+# @ registry.cn-guangzhou.aliyuncs.com/s/grape:v1  // 冒号前为镜像名称，后是标签，也可以理解为版本号
 
 docker kill server
 docker rm server
-docker run --name server -p 8090:8090 -d -e 'NODE_ENV=production' --restart=always registry.cn-hangzhou.aliyuncs.com/sessionboy/sinn:v1
+docker run --name server -p 8090:8090 -d -e 'NODE_ENV=production' --restart=always registry.cn-hangzhou.aliyuncs.com/kolafim/grape:v1

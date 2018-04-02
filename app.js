@@ -17,15 +17,15 @@ onerror(app);
 
 process.THEME_LIST = ['theme-1','theme-2']
 process.global = {
-  server_name : 'sinn管理',
+  server_name : 'server管理',
   theme:1//主题下标
 }
 
 // cookies
-app.keys = ['sinn:secret'];
+app.keys = ['grape:secret'];
 const CONFIG = {
-  key: 'sinn',
-  maxAge: 604800000,  // 7天
+  key: 'grape',
+  maxAge: 7*24*60*60*1000, // 7天
   overwrite: true,
   signed: true,
 };

@@ -13,6 +13,9 @@
 .theme-1 .theme-bg-color {
   background-color: #4740af !important
 }
+.theme-1 .theme-input:focus {
+  border-color:#a39def
+}
 
 .theme-2 .theme-color, .theme-2 a {
   color:#504386
@@ -28,6 +31,9 @@
 }
 .theme-2 .theme-bg-color {
   background-color: #504386 !important
+}
+.theme-2 .theme-input:focus {
+  border-color:#ac9dea
 }
 
 
@@ -68,6 +74,17 @@
 .blue {
   color:#00B7FF;
 }
+
+/* input */
+.theme-input {
+  height: 36px;
+  font-size: 15px;
+  color: #555;
+  border: 0;
+  outline: none;
+  border-bottom: 1px solid #999;
+}
+
 
 /* table */
 .theme-table {

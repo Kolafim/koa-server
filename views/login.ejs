@@ -6,18 +6,18 @@
   <body class="h100 <%= ('undefined' != typeof process.global && 'undefined' != typeof process.THEME_LIST)?process.THEME_LIST[process.global.theme]:'theme-2' %>">
    <div class="mini-box flex flex-v">
     <form class="signform" method="post" action="/server/login" onsubmit="return form_submit(this);">
-     <div class="sign-title">Sinn <span> 小客栈 </span> 后台</h2></div>
+     <div class="sign-title"><%= process.global.server_name %></div>
      <div class="list">
        <label>Your Username 用户名 </label>
-       <input type="text" name="name" class="item">
+       <input type="text" name="name" class="item theme-input">
      </div>
      <div class="list">
        <label>And Your Password 密码</label>
-       <input type="password" name="password" class="item">
+       <input type="password" name="password" class="item theme-input">
      </div>
-     <button type="submit" class="sign-btn">登录</button>
+     <button type="submit" class="sign-btn theme-btn">登录</button>
      <div class="sign-redirct">
-      <div class="sign-tip">前台地址:<a href="http://sinn.boyagirl.com" target="_blank">http://sinn.boyagirl.com</a></div>
+      <!-- <div class="sign-tip">前台地址:<a href="http://grape.kolafim.com" target="_blank">http://grape.kolafim.com</a></div> -->
      </div>
     </form>
    </div>

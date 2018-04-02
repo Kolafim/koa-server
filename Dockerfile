@@ -1,7 +1,7 @@
-From registry.cn-hangzhou.aliyuncs.com/sessionboy/node:7.5
+From registry.cn-hangzhou.aliyuncs.com/kolafim/node:7.5
 
-COPY ./ /sinn-server
-WORKDIR /sinn-server
+COPY ./ /koa-server
+WORKDIR /koa-server
 RUN npm install
 
 EXPOSE 8080

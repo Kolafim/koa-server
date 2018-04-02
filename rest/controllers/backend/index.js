@@ -15,7 +15,7 @@ class BackendMain {
   static async Index(ctx) {
     console.log('seesion.user:', ctx.session.user);
     if(ctx.session.user && ctx.session.user.name) return ctx.redirect('/server/home');
-    return ctx.render('login', { title: 'SInn管理平台',message:'登录'});
+    return ctx.render('login', { message:'登录'});
   }
 
   // 首页渲染
@@ -23,7 +23,7 @@ class BackendMain {
     // console.log('flash:',ctx.flash);
     const user = ctx.session.user;
     const type = 'home';
-    return ctx.render(type, { title: 'SInn管理平台',message:'',type ,user });
+    return ctx.render(type, { message:'Home',type ,user });
   }
 
   // 分类管理

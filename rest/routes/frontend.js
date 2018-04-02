@@ -17,7 +17,7 @@ const router = require('koa-router')();
 //   await next();
 // });
 
-  // 前端sinn Api
+  // 前端 Api
 router
   .get('/api/query',IndexController.query)                                             // 获取首页数据
 
