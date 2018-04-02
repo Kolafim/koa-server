@@ -1,0 +1,65 @@
+/*
+* 按钮
+*/
+.btn {
+  display: inline-block;
+  width:100px;
+  height:35px;
+  line-height: 35px;
+  border-radius: 2px;
+  text-align: center;
+  border: 0;
+  cursor: pointer;
+  outline: none;
+  /*box-shadow: 2px;*/
+  font-size: 15px;
+}
+
+
+/*
+* 布局
+*/
+.pagination {
+  margin:20px 0px;
+}
+.mask {
+  width:100%;
+  height:100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 888;
+  background: #333;
+  filter: alpha(opacity=50);
+  -moz-opacity:0.5;
+  -khtml-opacity: 0.5;
+  opacity:0.5;
+}
+.hidden {
+  display: none!important;
+}
+
+.h100 {height:100%}
+.minh100 {min-height:100%}
+
+.flex {display: -webkit-box; display: -ms-flexbox; display: flex;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content: space-around;}
+.flex2 {display: -webkit-box; display: -ms-flexbox; display: flex;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content: space-between;}
+.flex-line {display: -webkit-box;display: -ms-flexbox;display: flex;-webkit-box-align: center;-ms-flex-align: center;align-items: center;}
+.flex-line-start {display: -webkit-box;display: -ms-flexbox;display: flex;-webkit-box-align: flex-start;-ms-flex-align: flex-start;align-items: flex-start;}
+.flex-line-end {display: -webkit-box;display: -ms-flexbox;display: flex;-webkit-box-align: flex-end;-ms-flex-align: flex-end;align-items: flex-end;}
+.flex-1 {-webkit-box-flex: 1;-webkit-flex: 1;flex: 1}
+.flex-fixed {position:fixed;left:0;top:0;right:0;bottom:0;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-pack:center;-webkit-justify-content:center;-ms-flex-pack:center;justify-content:center;-webkit-box-align:center;-webkit-align-items:center;-ms-flex-align:center;align-items:center;z-index:10}
+.flex-v{-webkit-box-orient:vertical;-webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column;}
+.flex-right {-webkit-justify-content: flex-end;-moz-box-pack:end;-webkit--moz-box-pack:end;justify-content: flex-end}
+.flex-center {-webkit-justify-content:center;-moz-box-pack:center;-webkit--moz-box-pack:center;box-pack:center;justify-content:center}
+
+.table { display:table;table-layout: fixed;width:100%;}
+.thead { display:table-header-group;}
+.tbody { display:table-row-group;}
+.tfoot {display:table-footer-group}
+.tr {display: table-row}
+.td {display:table-cell}
+
+.top {vertical-align: top}
+.middle {vertical-align: middle}
+.bottom {vertical-align: bottom}

@@ -1,0 +1,10 @@
+
+<div class="sidebar">
+  <div class="menu-box">
+    <% for(var i=0; i<menu.length; i++) {%>
+     <a href="<%= menu[i].route %>" class="<%= index==i?'theme-color-light':'' %>">
+      <%= menu[i].label %>
+     </a>
+    <% } %>
+  </div>
+</div>

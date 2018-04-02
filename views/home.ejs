@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include("./layout/head.ejs") %>
+  </head>
+  <body class="<%= ('undefined' != typeof process.global && 'undefined' != typeof process.THEME_LIST)?process.THEME_LIST[process.global.theme]:'theme-2' %>">
+   <%- include("./layout/header.ejs") %>
+   <div class="tips theme-color-light">欢迎来到首页!O(∩_∩)O~~</div>
+   <form action="">
+
+   </form>
+   <%- include("./layout/footer.ejs") %>
+  </body>
+  <script type="text/javascript" src="/js/jquery-3.1.1.min.js"></script>
+  <script>
+
+  </script>
+</html>

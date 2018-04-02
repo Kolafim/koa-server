@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include("./layout/head.ejs") %>
+    <link rel='stylesheet' href='/styles/pagination.min.css' />
+  </head>
+  <body class="<%= ('undefined' != typeof process.global && 'undefined' != typeof process.THEME_LIST)?process.THEME_LIST[process.global.theme]:'theme-2' %>">
+   <div class="mask hidden"></div>
+   <%- include("./layout/header.ejs") %>
+   <div class="table page-main-table">
+     <div class="tr">
+       <div class="td page-main-left">
+         <%- include("./layout/sidebar.ejs") %>
+       </div>
+       <div class="td page-main-right">
+         <%- include(path) %>
+         <%- include("./layout/footer.ejs") %>
+       </div>
+     </div>
+   </div>
+   
+   <script type="text/javascript" src="/js/jquery-3.1.1.min.js"></script>
+   <script type="text/javascript" src="/js/pagination.min.js"></script>
+   <script type="text/javascript" src="/js/master.js"></script>
+   <script>
+    $('.pagination').pagination({
+      row: 6,
+      total: "<%= count %>"?"<%= count %>":0,
+      current: "<%= current %>"?"<%= current %>":1,
+      onJump: function(page){
+        window.location.href='/server/category?type=category'
+               +'&item='+"<%= index %>"+'&page='+page;
+      }
+    });
+   </script>
+  </body>
+</html>

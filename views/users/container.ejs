@@ -1,0 +1,82 @@
+<div class="container user">
+  <div class="c-top">
+    <button class="btn theme-btn" id="create_user_show" onclick="showform('#create_user')"><b>+</b>添加管理员</button>
+   </div>
+   <table class="admin-user-list theme-table">
+      <thead>
+        <tr>
+          <td class="index"></td>
+          <td>用户名</td>
+          <td>昵称</td>
+          <td>创建时间</td>
+        </tr>
+      </thead>
+      <tbody>
+        <% for(var i=0; i<data.length; i++) { %>
+        <tr>
+          <td class="index"><%= data[i].__v %></td>
+          <td><%= data[i].name %></td>
+          <td><%= data[i].nickname %></td>
+          <td><%= new Date(data[i].createdAt).format('yyyy-MM-dd hh-mm') %></td>
+        </tr>
+        <% } %>
+      </tbody>
+   </table>
+  <form action="/server/user/create_user" id="create_user" method="post" class="cateform createform hidden" onsubmit="return form_submit(this)">
+   <div class="form-box">
+    <div class="title theme-bg-color">创建管理员账号</div>
+    <div class="list">
+       <label> Your name 用户名 </label>
+       <input type="text" name="name" class="item" required="required">
+    </div>
+    <div class="list">
+       <label> Your nickname 昵称 </label>
+       <input type="text" name="nickname" class="item" required="required">
+    </div>
+    <div class="list">
+       <label>Your password 密码 </label>
+       <input type="password" name="password" class="item" required="required">
+    </div>
+    <div class="option">
+     <button type="submit" class="btn theme-btn">确定</button>
+     <a class="btn theme-btn-default" id="canceltcate" onclick="hiddenform('#create_user')">取消</a>
+    </div>
+   </div>
+  </form>
+</div>
+<script type="text/javascript" src="/js/jquery-3.1.1.min.js"></script>
+<script>
+  function decodeHTML(str){
+    let converter = document.createElement("DIV");
+    converter.innerHTML = str;
+    let output = converter.innerText;
+    converter = null;
+    return output;
+  }
+  let _data = '<%= JSON.stringify(data) %>';
+  console.log(JSON.parse(decodeHTML(_data)));
+  function form_submit(e){
+    // console.log(e.action);
+    $.ajax({
+      type:'POST',
+      url:e.action,
+      data:$(e).serializeArray(),
+      dataType:'json',
+      success(data){
+        console.log(data);
+        // alert(data.msg);
+        // location.replace("/server/home");
+        location.reload();
+      },
+      error(e){
+        // console.warn(e);
+        if(e.status < 500 && e.responseJSON && e.responseJSON.msg){
+          alert(e.responseJSON.msg);
+        }else if(e.status != 302){
+          alert("请求服务器出错");
+        }
+      }
+    })
+    return false;
+  }
+</script>
