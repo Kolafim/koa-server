@@ -1,15 +1,12 @@
 /** 通用async转换函数 */
 Function.prototype.sync = async function(...k){
-  // console.log('arguments',arguments);
-  let _t = this;
-  let _f = new Promise(function (resolve, reject) {
-    _t.call(_t, ...k, resolve, reject);
-  }).catch((err)=>{
+  return new Promise((resolve, reject)=>{
+    this.call(this, ...k, resolve, reject);
+  }).catch(err=>{
     //此处处理async过程中的异常
     if('object'==typeof Sync) Sync.url_temp = '';
     console.log('Function.sync err:',err);
   });
-  return await _f;
 };
 
 // const _ajax = Symbol('ajax')
