@@ -6,7 +6,7 @@
   <body class="h100 <%= ('undefined' != typeof process.global && 'undefined' != typeof process.THEME_LIST)?process.THEME_LIST[process.global.theme]:'theme-2' %>">
    <div class="mini-box flex flex-v">
     <form class="signform" method="post" action="/server/login" onsubmit="return form_submit(this);">
-     <div class="sign-title"><%= process.global.server_name %></div>
+     <div class="sign-title theme-color-light"><%= process.global.server_name %></div>
      <div class="list">
        <label>Your Username 用户名 </label>
        <input type="text" name="name" class="item theme-input">
@@ -21,33 +21,43 @@
      </div>
     </form>
    </div>
-  <script type="text/javascript" src="/js/jquery-3.1.1.min.js"></script>
-  <script type="text/javascript" src="/js/sign.js"></script>
+  <!-- <script type="text/javascript" src="/js/jquery-3.1.1.min.js"></script> -->
   <script>
-    // $("form.signform")
-    function form_submit(e){
-      // console.log(e.action);
-      $.ajax({
-        type:'POST',
-        url:e.action,
-        data:$(e).serializeArray(),
-        dataType:'json',
-        success(data){
-          console.log(data);
-          alert(data.msg);
-          location.replace("/server/home");
-        },
-        error(e){
-          // console.warn(e);
-          if(e.status < 500 && e.responseJSON && e.responseJSON.msg){
-            alert(e.responseJSON.msg);
-          }else if(e.status != 302){
-            alert("请求服务器出错");
-          }
-        }
-      })
+
+    var form_submit = function (e){
+      sign(e);
       return false;
     }
+    let sign = async function(e){
+      // await Sync.sleep(1000);
+
+      // let req = await post.sync(e.action,$(e).serializeArray());
+      let req = await Sync.post(e.action,e)
+      console.log('req:',req);
+      if(req && req.code == 200){
+        alert(req.msg);
+        location.replace("/server/home");
+      }else{
+        alert(req.msg);
+      }
+      console.log("req end!");
+    }
+
+    // function post(url,data,s,f){
+    //   $.ajax({
+    //     type:'POST',
+    //     url:url,
+    //     data:data,
+    //     dataType:'json',
+    //     success(data){
+    //       s(data)
+    //     },
+    //     error(e){
+    //       // f(e);
+    //       s(e.responseJSON);
+    //     }
+    //   })
+    // }
   </script>
   </body>
 </html>
