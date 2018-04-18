@@ -14,28 +14,36 @@
       <tbody>
         <% for(var i=0; i<data.length; i++) { %>
         <tr>
-          <td class="index"><%= data[i].__v %></td>
+          <td class="index"><%= skip-0+1+i %></td>
           <td><%= data[i].name %></td>
           <td><%= data[i].nickname %></td>
-          <td><%= new Date(data[i].createdAt).format('yyyy-MM-dd hh-mm') %></td>
+          <td><%= new Date(data[i].createdAt).format('yyyy-MM-dd hh:mm') %></td>
         </tr>
         <% } %>
       </tbody>
    </table>
-  <form action="/server/user/create_user" id="create_user" method="post" class="cateform createform hidden" onsubmit="return form_submit(this)">
+   <div class="page-box">
+     <p class="textcenter">
+       <span class="des gray">共 <%= totals %> 条，共 <%= page_length %> 页</span>
+       <% if(page>=2){ %> <a href="?type=<%= type %>&item=<%= index %>&page=<%= page-1 %>">上一页</a><% } %>
+       <span><%= page %></span>
+       <% if(page<page_length){ %> <a href="?type=<%= type %>&item=<%= index %>&page=<%= page-0+1 %>">下一页</a><% } %>
+     </p>
+   </div>
+  <form action="/server/user/create_user" id="create_user" method="post" class="cateform createform hidden" onsubmit="return Sync.form_submit(this)">
    <div class="form-box">
     <div class="title theme-bg-color">创建管理员账号</div>
     <div class="list">
        <label> Your name 用户名 </label>
-       <input type="text" name="name" class="item" required="required">
+       <input type="text" name="name" class="item theme-input" required="required" autocomplete="off">
     </div>
     <div class="list">
        <label> Your nickname 昵称 </label>
-       <input type="text" name="nickname" class="item" required="required">
+       <input type="text" name="nickname" class="item theme-input" required="required" autocomplete="off">
     </div>
     <div class="list">
        <label>Your password 密码 </label>
-       <input type="password" name="password" class="item" required="required">
+       <input type="text" name="password" class="item theme-input" required="required" autocomplete="off">
     </div>
     <div class="option">
      <button type="submit" class="btn theme-btn">确定</button>
@@ -44,7 +52,7 @@
    </div>
   </form>
 </div>
-<script type="text/javascript" src="/js/jquery-3.1.1.min.js"></script>
+<!-- <script type="text/javascript" src="/js/jquery-3.1.1.min.js"></script> -->
 <script>
   function decodeHTML(str){
     let converter = document.createElement("DIV");
@@ -55,28 +63,8 @@
   }
   let _data = '<%= JSON.stringify(data) %>';
   console.log(JSON.parse(decodeHTML(_data)));
-  function form_submit(e){
-    // console.log(e.action);
-    $.ajax({
-      type:'POST',
-      url:e.action,
-      data:$(e).serializeArray(),
-      dataType:'json',
-      success(data){
-        console.log(data);
-        // alert(data.msg);
-        // location.replace("/server/home");
-        location.reload();
-      },
-      error(e){
-        // console.warn(e);
-        if(e.status < 500 && e.responseJSON && e.responseJSON.msg){
-          alert(e.responseJSON.msg);
-        }else if(e.status != 302){
-          alert("请求服务器出错");
-        }
-      }
-    })
-    return false;
+
+  Sync.success = function(d){
+    location.reload();
   }
 </script>

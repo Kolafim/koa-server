@@ -2,10 +2,10 @@
 * @ use 首页及主要模块接口逻辑层
 */
 
-import { UserModel } from '../../models/index';
-import mongoose from 'mongoose';
+import { UserModel, ArticleModel } from '../../models/index';
+// import mongoose from 'mongoose';
 import moment from 'moment';
-const ArticleModel = mongoose.model('Article');
+// const ArticleModel = mongoose.model('Article');
 
 class IndexController {
 

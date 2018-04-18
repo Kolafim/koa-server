@@ -1,10 +1,11 @@
 /*
 * @ use 用户及相关接口逻辑层
 */
-import mongoose from 'mongoose';
+import { UserModel, ArticleModel } from '../../models/index';
+// import mongoose from 'mongoose';
 import md5 from 'md5';
-const UserModel = mongoose.model('User');
-const ArticleModel = mongoose.model('Article');
+// const UserModel = mongoose.model('User');
+// const ArticleModel = mongoose.model('Article');
 
 class UserController {
 

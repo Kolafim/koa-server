@@ -1,0 +1,112 @@
+<div class="container">
+  <div class="c-top">
+    <button class="btn theme-btn" id="create_arc_show" onclick="showform('#create_arc')"><b>+</b>添加文章</button>
+  </div>
+  <table class="admin-user-list theme-table">
+    <thead>
+      <tr>
+        <td class="index"></td>
+        <td>cover</td>
+        <td>title</td>
+        <td>作者</td>
+        <td>评论数</td>
+        <td>创建时间</td>
+        <td>操作</td>
+      </tr>
+    </thead>
+    <tbody>
+      <% for(var i=0; i<list.length; i++) { %>
+      <tr>
+        <td class="index"><%= skip+0+1+i %></td>
+        <td> <img class="table-img" src="<%= list[i].cover %>"> </td>
+        <td><%= list[i].title %></td>
+        <td><%= list[i].author?list[i].author.nickname:'-' %></td>
+        <td><%= list[i].comments.length %></td>
+        <td><%= new Date(list[i].createdAt).format('yyyy-MM-dd hh:mm') %></td>
+        <td>
+          <a onclick="openArc(<%= i %>)">查看</a>
+          <a onclick="edArc(<%= i %>)">编辑</a>
+          <a onclick="delArc(<%= i %>)">删除</a>
+        </td>
+      </tr>
+      <% } %>
+    </tbody>
+  </table>
+  <div class="page-box">
+    <p class="textcenter">
+      <span class="des gray">共 <%= totals %> 条，共 <%= page_length %> 页</span>
+      <% if(page>=2){ %> <a href="?type=<%= type %>&item=<%= index %>&page=<%= page-1 %>">上一页</a><% } %>
+      <span><%= page %></span>
+      <% if(page<page_length){ %> <a href="?type=<%= type %>&item=<%= index %>&page=<%= page-0+1 %>">下一页</a><% } %>
+    </p>
+  </div>
+  <form id="create_arc" class="cateform createform hidden" method="post" action="/api/article/create_test" onsubmit="return Sync.form_submit(this);">
+    <div class="form-box">
+      <div class="title theme-bg-color">添加文章</div>
+      <div class="list">
+       <label>标题</label>
+       <input type="text" name="title" class="item theme-input" autocomplete="off">
+      </div>
+      <div class="list">
+       <label>内容</label>
+       <!-- <input type="password" name="password" class="item theme-input"> -->
+       <textarea id="content" name="content" rows="5" class="item theme-input"></textarea>
+      </div>
+      <input type="hidden" name="categoryId" value="5abf4c2981f0c403b8c4936a">
+      <input type="hidden" name="modality" value="2">
+      <input type="hidden" name="In_situ" value="">
+      <input type="hidden" name="cover" value="https://mir-s3-cdn-cf.behance.net/project_modules/fs/9a055436291381.5716972f706c1.jpg">
+      <div class="sign-redirct">
+      <!-- <div class="sign-tip">前台地址:<a href="http://grape.kolafim.com" target="_blank">http://grape.kolafim.com</a></div> -->
+      </div>
+      <div class="option">
+        <button type="submit" class="btn theme-btn">确定</button>
+        <a class="btn theme-btn-default" id="canceltcate" onclick="hiddenform('#create_arc')">取消</a>
+      </div>
+    </div>
+  </form>
+  <div id="arc_view" class="cateform createform hidden">
+    <div class="form-box">
+      <div class="list">
+        <h4 class="arc-title"></h4>
+      </div>
+      <div class="list">
+        <pre class="arc-content"></pre>
+      </div>
+
+      <div class="option textcenter">
+        <a class="btn theme-btn-default" onclick="hiddenform('#arc_view')">取消</a>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  let _list = JSON.parse('<%- JSON.stringify(list).replace(/\\n/g,"\\\\n") %>');
+  // console.log(decodeHTML(_list));
+  console.log(_list);
+
+  Sync.success = function(d){
+    hiddenform('#create_arc');
+    location.reload();
+  }
+
+  let _arc_title = document.querySelector("#arc_view .arc-title");
+  let _arc_content = document.querySelector("#arc_view .arc-content");
+  function openArc(index){
+    console.log(index);
+    console.log(_list[index]);
+    _arc_title.innerText = _list[index].title;
+    _arc_content.innerText = _list[index].content;
+    showform("#arc_view");
+  }
+
+  let delArc = async function(index){
+    return;
+    let d = await Sync.post("/server/article/delete_cate",{id:1});
+    console.log(d);
+    if(d && d.code == 200){
+      alert(d.msg);
+      location.reload();
+    }
+  }
+</script>

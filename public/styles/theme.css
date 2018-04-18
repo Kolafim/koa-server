@@ -84,6 +84,11 @@
   outline: none;
   border-bottom: 1px solid #999;
 }
+textarea.theme-input {
+  width:100%;
+  height:86px;
+  resize:none;
+}
 
 
 /* table */
@@ -112,5 +117,9 @@
   text-align: right;
 }
 .theme-table tbody tr td.index {
-  width:20%;
+  /*width:20%;*/
+}
+.theme-table tr td .table-img {
+  max-width:100px;
+  max-height:80px;
 }

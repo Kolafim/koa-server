@@ -10,6 +10,7 @@ const UserSchema = new Schema({
   email: { type: String, default: '' },
   avatar: { type: String,default:'' },    // 头像
   profile: { type: String,default:'' },   // 个人简介
+  isadmin: {type:Number,default:0},       //是否为管理员
   password: { type: String, required: true },
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now }

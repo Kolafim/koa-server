@@ -23,10 +23,13 @@ export default {
     // 用户管理
     user: [
     {
-      label:'用户列表',
+      label:'管理员列表',
       route: '/server/user?type=user'
     },{
       label:'权限管理',
       route: '/server/user?type=user&item=1'
+    },{
+      label:'用户列表',
+      route: '/server/user?type=user&item=2'
     }],
 }

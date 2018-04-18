@@ -5,14 +5,37 @@
   </head>
   <body class="<%= ('undefined' != typeof process.global && 'undefined' != typeof process.THEME_LIST)?process.THEME_LIST[process.global.theme]:'theme-2' %>">
    <%- include("./layout/header.ejs") %>
-   <div class="tips theme-color-light">欢迎来到首页!O(∩_∩)O~~</div>
-   <form action="">
+    <!-- <div class="tips theme-color-light">欢迎来到首页!O(∩_∩)O~~</div> -->
+   <div class="mini-box flex flex-v">
+     <form class="signform" method="post" action="/api/article/create_test" onsubmit="return Sync.form_submit(this);">
+      <div class="sign-title theme-color-light">发表文章</div>
+      <div class="list">
+        <label>标题</label>
+        <input type="text" name="title" class="item theme-input">
+      </div>
+      <div class="list">
+        <label>内容</label>
+        <!-- <input type="password" name="password" class="item theme-input"> -->
+        <textarea id="content" name="content" rows="5" class="item theme-input"></textarea>
+      </div>
+      <input type="hidden" name="categoryId" value="5abf4c2981f0c403b8c4936a">
+      <input type="hidden" name="modality" value="2">
+      <input type="hidden" name="In_situ" value="">
+      <input type="hidden" name="cover" value="https://mir-s3-cdn-cf.behance.net/project_modules/fs/9a055436291381.5716972f706c1.jpg">
+      <button type="submit" class="sign-btn theme-btn">发表</button>
+      <div class="sign-redirct">
+       <!-- <div class="sign-tip">前台地址:<a href="http://grape.kolafim.com" target="_blank">http://grape.kolafim.com</a></div> -->
+      </div>
+     </form>
+   </div>
 
-   </form>
    <%- include("./layout/footer.ejs") %>
   </body>
-  <script type="text/javascript" src="/js/jquery-3.1.1.min.js"></script>
+  <!-- <script type="text/javascript" src="/js/jquery-3.1.1.min.js"></script> -->
   <script>
+    Sync.success = function(d){
+      console.log('sssuc:',d);
+    }
 
   </script>
 </html>

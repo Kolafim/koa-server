@@ -4,6 +4,7 @@
     <%- include("./layout/head.ejs") %>
   </head>
   <body class="<%= ('undefined' != typeof process.global && 'undefined' != typeof process.THEME_LIST)?process.THEME_LIST[process.global.theme]:'theme-2' %>">
+   <div class="mask hidden"></div>
    <%- include("./layout/header.ejs") %>
    <div class="table page-main-table">
      <div class="tr">
@@ -11,13 +12,15 @@
          <%- include("./layout/sidebar.ejs") %>
        </div>
        <div class="td page-main-right">
-          <div class="container">
-
-          </div>
-          <%- include("./common/tips.ejs") %>
+          <%- include(["./articles/list.ejs","./articles/comment.ejs"][index]) %>
+          <!-- <%- include("./common/tips.ejs") %> -->
           <%- include("./layout/footer.ejs") %>
        </div>
      </div>
    </div>
   </body>
+  <script type="text/javascript" src="/js/master.js"></script>
+  <script>
+
+  </script>
 </html>

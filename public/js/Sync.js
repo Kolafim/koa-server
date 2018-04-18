@@ -18,9 +18,11 @@ Function.prototype.sync = async function(...k){
  *  @ Sync.formData(form) form表单序列
  */
 // class Sync {
-let Sync = {
+window.Sync = {
   // constructor(){}
   url_temp:'',
+  success:0,
+  fail:0,
   async sleep(ms){
     console.log(`sleep ${ms}ms!`);
     let _func = (ms,s)=>{
@@ -74,6 +76,27 @@ let Sync = {
     }
     return arr
   },
+  form_submit(e){
+    // console.log(window[e.dataset.success]);
+    this._form_submit(e);
+    return false;
+  },
+  _form_submit : async function(e){
+    // await Sync.sleep(1000);
+    if(!e.action) {
+      console.warn('form action 为空');
+      return;
+    }
+    let req = await this.post(e.action,e)
+    console.log('req:',req);
+    if(req && req.code == 200){
+      if('function' == typeof this.success) this.success(req);
+      else alert(req.msg);
+    }else{
+      if('function' == typeof this.fail) this.fail(req);
+      else alert(req.msg);
+    }
+  },
   _ajax(obj,s,f){
     obj=obj||{};
     obj.type=(obj.type||'GET').toUpperCase();
@@ -113,3 +136,10 @@ let Sync = {
     }
   }
 }
+
+// Object.prototype.addClassName = function(str){
+//   if(!this.className.match(new RegExp(str,"g"))) this.className = this.className.replace(/\s?$/," "+str);
+// }
+// Object.prototype.removeClassName = function(){
+//   this.className = this.className.replace(new RegExp("\\s?"+str,"g"),"");
+// }

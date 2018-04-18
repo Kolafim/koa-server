@@ -1,13 +1,13 @@
 /*
 * @ use 文章及其相关接口逻辑层
 */
-
-import mongoose from 'mongoose';
-const UserModel = mongoose.model('User');
-const ArticleModel = mongoose.model('Article');
-const CategoryModel = mongoose.model('Category');
-const TopCategoryModel = mongoose.model('TopCategory');
-const CommentModel = mongoose.model('Comment');
+import { UserModel, ArticleModel, CategoryModel, TopCategoryModel, CommentModel } from '../../models/index';
+// import mongoose from 'mongoose';
+// const UserModel = mongoose.model('User');
+// const ArticleModel = mongoose.model('Article');
+// const CategoryModel = mongoose.model('Category');
+// const TopCategoryModel = mongoose.model('TopCategory');
+// const CommentModel = mongoose.model('Comment');
 
 class ArticleController {
 
@@ -22,6 +22,30 @@ class ArticleController {
     if(!data) return ctx.error({ msg: '发送数据失败!' });
     const isexit = await ArticleModel.findOne({ title:data.title });
     if(isexit) return ctx.error({ msg: '该标题已存在!' });
+
+    data.author = _id;
+    data.praise = { user:[],num:0};
+    const resuft = await ArticleModel.create(data);
+    if(!resuft) return ctx.error({ msg: '文章创建失败!' });
+
+    return ctx.success({ msg:'发表成功!',data:resuft });
+  }
+
+  static async create_test(ctx) {
+    // const user = ctx.session.user;
+    // if(!user) return ctx.error({ msg: '你还没有登录哦!' });
+
+    // const { name, _id } = user;
+
+    let _u_a = await UserModel.find({},{_id:1}).skip(0).limit(1);//"5ad46bb486d4bf1c70e8e1ca";
+    if(_u_a.length <= 0 ) return ctx.error({ msg: '请先创建用户'});
+    let _id = _u_a[0]._id;
+
+    const data = ctx.request.body;
+
+    if(!data) return ctx.error({ msg: '发送数据失败!' });
+    // const isexit = await ArticleModel.findOne({ title:data.title });
+    // if(isexit) return ctx.error({ msg: '该标题已存在!' });
 
     data.author = _id;
     data.praise = { user:[],num:0};

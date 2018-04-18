@@ -1,51 +1,44 @@
-<script>
-  function edTcate(element){
-   var _id = element.getAttribute('cate_id');
-   var val = element.getAttribute('val');
-   $('#tcateeditor').removeClass('hidden');
-   $('.mask').removeClass('hidden');
-   $('#editortcate').val(val);
-   $('#tcate_id').val(_id);
-  }
-</script>
-
 <div class="container cate">
-  <div class="top">
+  <div class="c-top">
     <button class="btn theme-btn" id="tcate" onclick="showform('#tcateform')">添加分类</button>
   </div>
-  <div class="tabel">
-   <table class="cate-table">
-    <thead class="list-head">
-   	 <tr>
-   	 <th>序号</th>
-   	 <th>分类名称</th>
-   	 <th>更新时间</th>
-     <th>操作</th>
-   	 </tr>
-     </thead>
-     <tbody class="list-body">
+  <table class="theme-table">
+    <thead>
+      <tr>
+        <td class="index">序号</td>
+        <td>分类名称</td>
+        <td>更新时间</td>
+        <td>操作</td>
+      </tr>
+    </thead>
+    <tbody>
       <% for(var i=0; i<data.length; i++) { %>
        <tr>
-        <td><%= i+1 %></td>
+        <td class="index"><%- skip+0+1+i %></td>
         <td> <%= data[i].tcate_name %> </td>
         <td> <%= moment(data[i].createdAt).format('YYYY-MM-DD HH:mm') %> </td>
         <td>
          <a onclick="edTcate(this)" cate_id=<%= data[i]._id %> val=<%= data[i].tcate_name %> >编辑</a>
-         <a href="/server/article/delete_cate/<%= data[i]._id %>?item=<%= index %>&type=<%= type %>">删除</a>
+         <a onclick="delTcate('<%= data[i]._id %>')" _href="/server/article/delete_cate/<%= data[i]._id %>?model=<%= model %>&type=<%= type %>">删除</a>
         </td>
        </tr>
       <% } %>
     </tbody>
-   </table>
+  </table>
+  <div class="page-box">
+    <p class="textcenter">
+      <span class="des gray">共 <%= totals %> 条，共 <%= page_length %> 页</span>
+      <% if(page>=2){ %> <a href="?type=<%= type %>&item=<%= index %>&page=<%= page-1 %>">上一页</a><% } %>
+      <span><%= page %></span>
+      <% if(page<page_length){ %> <a href="?type=<%= type %>&item=<%= index %>&page=<%= page-0+1 %>">下一页</a><% } %>
+    </p>
   </div>
-  <form action="/server/article/create_tcate" id="tcateform" method="post" class="cateform hidden">
+  <form action="/server/article/create_tcate" id="tcateform" method="post" class="createform cateform hidden" onsubmit="return Sync.form_submit(this)">
    <div class="form-box">
-    <div class="title">
-     <h3>创建分类</h3>
-    </div>
+    <div class="title theme-bg-color">创建分类</div>
     <div class="list">
        <label>First Category 一级分类 </label>
-       <input type="text" name="tcate_name" class="item" required="required">
+       <input type="text" name="tcate_name" class="item theme-input" required="required" autocomplete="off">
     </div>
     <div class="option">
      <button type="submit" class="btn theme-btn">确定</button>
@@ -53,15 +46,13 @@
     </div>
    </div>
   </form>
-  <form action="/server/article/put_tcate" id="tcateeditor" method="post" class="cateform hidden">
+  <form action="/server/article/put_tcate" id="tcateeditor" method="post" class="cateform hidden" onsubmit="return Sync.form_submit(this)">
    <div class="form-box">
-    <div class="title">
-     <h3>编辑分类</h3>
-    </div>
+     <div class="title theme-bg-color">编辑分类</div>
     <div class="list">
        <label>First Category 一级分类 </label>
-       <input type="text" name="tcate_name" class="item" id="editortcate" required="required">
-       <input type="text" name="id" class="item hidden" id="tcate_id">
+       <input type="text" id="editortcate" name="tcate_name" class="item theme-input" required="required">
+       <input type="hidden" id="tcate_id" name="id">
     </div>
     <div class="option">
      <button type="submit" class="btn theme-btn">修改</button>
@@ -70,3 +61,31 @@
    </div>
   </form>
 </div>
+<script>
+  let _editortcate = document.querySelector("#editortcate");
+  let _tcate_id = document.querySelector("#tcate_id");
+  function edTcate(element){
+    var _id = element.getAttribute('cate_id');
+    var _val = element.getAttribute('val');
+    // $('#tcateeditor').removeClass('hidden');
+    // $('.mask').removeClass('hidden');
+    showform("#tcateeditor");
+    _editortcate.value = _val;
+    _tcate_id.value = _id;
+  }
+
+  Sync.success = (d)=>{
+    // console.log(d);
+    alert(d.msg);
+    location.reload();
+  }
+
+  let delTcate = async function(_id){
+    let d = await Sync.post("/server/article/delete_cate",{id:_id,model:'<%= model %>',type:'<%= type %>'});
+    console.log(d);
+    if(d && d.code == 200){
+      alert(d.msg);
+      location.reload();
+    }
+  }
+</script>

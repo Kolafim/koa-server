@@ -19,40 +19,47 @@
 </script>
 
 <div class="container cate">
-  <div class="top">
+  <div class="c-top">
     <button class="btn theme-btn" id="acate" onclick="showform('#acateform')">添加分类</button>
    </div>
-   <div class="tabel">
-    <table class="cate-table">
-   <thead class="list-head">
-   	<tr>
-   	 <th>序号</th>
-   	 <th>分类名称</th>
-   	 <th>所属分类</th>
-   	 <th>简述</th>
-   	 <th>更新时间</th>
-     <th>操作</th>
-   	</tr>
-    </thead>
-    <tbody class="list-body">
-      <% for(var i=0; i<data.length; i++) {%>
+   <table class="theme-table">
+     <thead>
        <tr>
-        <td><%= i+1 %></td>
-        <td> <%= data[i].cate_name %> </td>
-        <td> <%= data[i].cate_parent.tcate_name %> </td>
-        <td> <%= data[i].cate_info %> </td>
-        <td> <%= moment(data[i].createdAt).format('YYYY-MM-DD HH:mm') %> </td>
-        <td>
-        <a onclick="edAcate(this)"
-         id=<%= data[i]._id %>
-         cate_name=<%= data[i].cate_name %>
-         cate_info=<%= data[i].cate_info %> >编辑</a>
-         <a href="/server/article/delete_cate/<%= data[i]._id %>?item=<%= index %>&type=<%= type %>">删除</a>
-        </td>
+         <td class="index">序号</td>
+         <td>分类名称</td>
+         <td>所属分类</td>
+         <td>简述</td>
+         <td>更新时间</td>
+         <td>操作</td>
        </tr>
-      <% } %>
-    </tbody>
+     </thead>
+     <tbody>
+       <% for(var i=0; i<data.length; i++) {%>
+        <tr>
+         <td class="index"><%= skip-0+1+i %></td>
+         <td> <%= data[i].cate_name %> </td>
+         <td> <%= data[i].cate_parent.tcate_name %> </td>
+         <td> <%= data[i].cate_info %> </td>
+         <td> <%= moment(data[i].createdAt).format('YYYY-MM-DD HH:mm') %> </td>
+         <td>
+         <a onclick="edAcate(this)"
+          id=<%= data[i]._id %>
+          cate_name=<%= data[i].cate_name %>
+          cate_info=<%= data[i].cate_info %> >编辑</a>
+          <a href="/server/article/delete_cate/<%= data[i]._id %>?item=<%= index %>&type=<%= type %>">删除</a>
+         </td>
+        </tr>
+       <% } %>
+     </tbody>
    </table>
+   <div class="page-box">
+     <p class="textcenter">
+       <span class="des gray">共 <%= totals %> 条，共 <%= page_length %> 页</span>
+       <% if(page>=2){ %> <a href="?type=<%= type %>&item=<%= index %>&page=<%= page-1 %>">上一页</a><% } %>
+       <span><%= page %></span>
+       <% if(page<page_length){ %> <a href="?type=<%= type %>&item=<%= index %>&page=<%= page-0+1 %>">下一页</a><% } %>
+     </p>
+   </div>
    <div class="pagination"></div>
    <form action="/server/article/create_acate" id="acateform" method="post" class="cateform hidden">
    <div class="form-box">
@@ -83,10 +90,7 @@
   </form>
   <form action="/server/article/put_acate" id="acateeditor" method="post" class="cateform hidden">
    <div class="form-box">
-    <div class="title">
-     <h3>编辑分类</h3>
-    </div>
-
+    <div class="title theme-bg-color">编辑分类</div>
     <div class="list">
        <label>所属分类: </label>
        <select name="cate_parent" id="cateselect">
@@ -110,5 +114,4 @@
     </div>
    </div>
   </form>
- </div>
 </div>

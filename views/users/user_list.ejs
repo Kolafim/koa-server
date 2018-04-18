@@ -1,0 +1,83 @@
+<div class="container user">
+  <div class="c-top">
+    <button class="btn theme-btn" id="create_user_show" onclick="showform('#create_user')"><b>+</b>添加用户</button>
+  </div>
+  <table class="admin-user-list theme-table">
+    <thead>
+      <tr>
+        <td class="index"></td>
+        <td>_id</td>
+        <td>用户名</td>
+        <td>昵称</td>
+        <td>管理员</td>
+        <td>创建时间</td>
+      </tr>
+    </thead>
+    <tbody>
+      <% for(var i=0; i<data.length; i++) { %>
+      <tr>
+        <td class="index"><%= skip-0+1+i %></td>
+        <td><%= data[i]._id %></td>
+        <td><%= data[i].name %></td>
+        <td><%= data[i].nickname %></td>
+        <td><%= (data[i].isadmin-0)?'管理员':'-' %></td>
+        <td><%= new Date(data[i].createdAt).format('yyyy-MM-dd hh:mm') %></td>
+      </tr>
+      <% } %>
+    </tbody>
+  </table>
+  <div class="page-box">
+    <p class="textcenter">
+      <span class="des gray">共 <%= totals %> 条，共 <%= page_length %> 页</span>
+      <% if(page>=2){ %> <a href="?type=<%= type %>&item=<%= index %>&page=<%= page-1 %>">上一页</a><% } %>
+      <span><%= page %></span>
+      <% if(page<page_length){ %> <a href="?type=<%= type %>&item=<%= index %>&page=<%= page-0+1 %>">下一页</a><% } %>
+    </p>
+  </div>
+  <form id="create_user" class="cateform createform hidden" method="post" action="/api/user/register" onsubmit="return Sync.form_submit(this)">
+   <div class="form-box">
+    <div class="title theme-bg-color">创建用户账号</div>
+    <div class="list">
+       <label> 用户名 </label>
+       <input type="text" name="name" class="item theme-input" required="required" autocomplete="off">
+    </div>
+    <div class="list">
+       <label> 昵称 </label>
+       <input type="text" name="nickname" class="item theme-input" required="required" autocomplete="off">
+    </div>
+    <div class="list">
+       <label> 密码 </label>
+       <input type="password" name="password" class="item theme-input" required="required" autocomplete="off">
+    </div>
+    <div class="list">
+       <label> 重复密码 </label>
+       <input type="password" name="apassword" class="item theme-input" required="required" autocomplete="off">
+    </div>
+    <div class="option">
+     <button type="submit" class="btn theme-btn">确定</button>
+     <a class="btn theme-btn-default" id="canceltcate" onclick="hiddenform('#create_user')">取消</a>
+    </div>
+   </div>
+  </form>
+</div>
+<!-- <script type="text/javascript" src="/js/jquery-3.1.1.min.js"></script> -->
+<script>
+  function decodeHTML(str){
+    let converter = document.createElement("DIV");
+    converter.innerHTML = str;
+    let output = converter.innerText;
+    converter = null;
+    return output;
+  }
+  let _data = '<%= JSON.stringify(data) %>';
+  console.log(JSON.parse(decodeHTML(_data)));
+
+  Sync.success = function(d){
+    alert('添加成功');
+    location.reload();
+  }
+  Sync.fail = function(e){
+    console.warn(e.msg);
+    alert(`添加失败\n\r${e.msg}`)
+  }
+</script>

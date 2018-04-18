@@ -1,21 +1,18 @@
 @import 'theme.css';
-*{
-	padding:0px;
-	margin:0px;
-	box-sizing: border-box;
-}
-html,body{
-	font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-	width:100%;
-	height:100%;
-}
-a {
-   text-decoration: none;
-   color: #00B7FF;
-}
-li {
-  list-style: none;
-}
+body, dl, dd, h1, h2, h3, h4, h5, h6, p, form, pre {margin:0;}
+ol, ul, td {margin:0; padding:0;}
+body, pre {font-size: 14px;font-family: "Lucida Grande",-apple-system-font,"Helvetica Neue","PingFang SC","Microsoft YaHei",sans-serif;}
+html, body {height:100%}
+ul, li {list-style: none;}
+table {border-collapse: collapse;border-spacing: 0;}
+a {outline:none;text-decoration:none;color:#333;-webkit-tap-highlight-color: transparent;}
+* {box-sizing: border-box;}
+pre, .pre { white-space: pre-wrap;}
+input, textarea, keygen, select, button {font-family: inherit;font-size: inherit;outline:none;}
+h1,h2,h3,h4,h5 {font-weight: 400}
+
+.fantasy {font-family: fantasy,"Lucida Grande",-apple-system-font,"Helvetica Neue","PingFang SC","Microsoft YaHei",sans-serif;}
+
 .nav-box {
   width:100%;
   height:60px;
@@ -96,26 +93,6 @@ li {
   height: 100%;
   border: 1px solid #999;
 }
-.cate-table {
-  padding:10px 0px;
-}
-.cate-table .list-head {
-  /*background: #eee;*/
-  border:1px solid #999;
-}
-.cate-table .list-head tr th{
-  background: #eee;
-  font-size: 14px;
-  margin:10px;
-  padding:10px;
-}
-.cate-table .list-body tr td{
- text-align: center;
- padding:10px;
- font-size: 12px;
- color:#555;
- border-bottom: 1px solid #eee;
-}
 
 #tcateform,#acateform,#tcateeditor,#acateeditor,.createform{
   width:360px;
@@ -125,8 +102,10 @@ li {
   left:50%;
   z-index: 999;
   background: #fff;
-  margin-left: -180px;
-  margin-top: -200px;
+  /*margin-left: -180px;*/
+  /*margin-top: -200px;*/
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
 	border-radius: 4px;
   overflow: hidden;
   box-shadow: 0 2px 20px rgba(255, 255, 255, 0.3);
@@ -143,7 +122,7 @@ li {
   margin:0px auto;
 	padding:1.4em 12px;
   line-height: 1em;
-  border-bottom: 1px solid #eee;
+  /*border-bottom: 1px solid #eee;*/
   color:#fff;
 	font-size: 16px
 }
@@ -161,32 +140,22 @@ li {
 }
 .cateform .form-box .list input {
   width:100%;
-  height:25px;
+  /*height:25px;*/
   margin:6px auto;
   display: block;
   outline: none;
-  border:none;
+  /*border:none;*/
   font-size: 15px;
-  border-bottom: 1px solid #eee;
+  /*border-bottom: 1px solid #eee;*/
 }
 .cateform .form-box .list select {
   width:80px;
-  height:25px;
+  height:36px;
   background: #fff;
   outline: none;
   border: 1px solid #eee;
 }
-.cateform .form-box .list textarea {
-  width:100%;
-  height:60px;
-  display: block;
-  margin:10px auto;
-  background: #fff;
-  outline: none;
-  text-indent: 12px;
-  padding:5px;
-  border: 1px solid #eee;
-}
+
 .cateform .form-box .option {
   width:80%;
   margin:10px auto;
@@ -196,7 +165,6 @@ li {
 .cateform .form-box .option .btn {
   margin:5px;
 	width: 80px;
-  height: 30px;
   line-height: 30px;
 }
 .cateform .form-box .option .theme-bg-color {
@@ -287,4 +255,19 @@ li {
 .page-main-right {
 	position:relative;
 	vertical-align: top;
+}
+
+.page-box {
+  margin-top:30px;
+}
+.page-box p span, .page-box p a {
+  display: inline-block;
+  vertical-align: middle;
+}
+.page-box p span {
+  min-width: 20px;
+}
+.page-box .des {
+  color:#bbb;
+  margin-right:10px;
 }

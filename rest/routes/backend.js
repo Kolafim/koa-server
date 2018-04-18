@@ -29,7 +29,7 @@ router
   .post('/server/article/create_acate', BackendArticle.create_acate)           // 创建二级分类
   .post('/server/article/put_tcate', BackendArticle.put_tcate)                 // 编辑一级分类
   .post('/server/article/put_acate', BackendArticle.put_acate)                 // 编辑二级分类
-  .get('/server/article/delete_cate/:id', BackendArticle.delete_cate);         // 删除分类
-
+  .get('/server/article/delete_cate/:id', BackendArticle.delete_cate)          // 删除分类GET
+  .post('/server/article/delete_cate', BackendArticle.delete_cate);            // 删除分类POST
 
 module.exports = router;
