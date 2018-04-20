@@ -31,7 +31,7 @@ router
   .post('/api/article/create_comment',ArticleController.create_comment)                // 发表评论
   .put('/api/article/article_put',ArticleController.article_put)                       // 编辑文章
   .put('/api/article/article_praise',ArticleController.article_praise)                 // 点赞文章
-  .delete('/api/article/del_article',ArticleController.del_article)                    // 删除文章
+  .post('/api/article/del_article',ArticleController.del_article)                    // 删除文章
   .delete('/api/article/del_comment',ArticleController.del_comment)                    // 删除评论
 
   // 用户相关api

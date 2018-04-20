@@ -6,7 +6,7 @@ const Schema = mongoose.Schema;
 
 const ArticleSchema = new Schema({
   title: { type: String, required: true },
-  categoryId: { type: Schema.Types.ObjectId,required: true },  // 文章类别
+  categoryId: { type: Schema.Types.ObjectId,ref:'TopCategory',required: true },  // 文章类别
   modality: { type: String,required: true },                   // 文章形式 连载、原创、转载三种
   In_situ: { type: String },                                   // 原文链接
   cover: { type: String,default:null },                        // 文章封面图

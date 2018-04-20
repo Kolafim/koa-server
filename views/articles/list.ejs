@@ -9,6 +9,7 @@
         <td>cover</td>
         <td>title</td>
         <td>作者</td>
+        <td>分类</td>
         <td>评论数</td>
         <td>创建时间</td>
         <td>操作</td>
@@ -21,6 +22,7 @@
         <td> <img class="table-img" src="<%= list[i].cover %>"> </td>
         <td><%= list[i].title %></td>
         <td><%= list[i].author?list[i].author.nickname:'-' %></td>
+        <td><%= list[i].categoryId?list[i].categoryId.tcate_name:'-' %></td>
         <td><%= list[i].comments.length %></td>
         <td><%= new Date(list[i].createdAt).format('yyyy-MM-dd hh:mm') %></td>
         <td>
@@ -52,7 +54,15 @@
        <!-- <input type="password" name="password" class="item theme-input"> -->
        <textarea id="content" name="content" rows="5" class="item theme-input"></textarea>
       </div>
-      <input type="hidden" name="categoryId" value="5abf4c2981f0c403b8c4936a">
+      <div class="list">
+         <label>所属分类</label>
+         <select name="categoryId">
+         <% category.forEach(function(item){ %>
+          <option value="<%= item._id %>" class="item" required="required"> <%= item.tcate_name %> </option>
+         <% }) %>
+         </select>
+      </div>
+      <!-- <input type="hidden" name="categoryId" value="5abf4c2981f0c403b8c4936a"> -->
       <input type="hidden" name="modality" value="2">
       <input type="hidden" name="In_situ" value="">
       <input type="hidden" name="cover" value="https://mir-s3-cdn-cf.behance.net/project_modules/fs/9a055436291381.5716972f706c1.jpg">
@@ -99,14 +109,18 @@
     _arc_content.innerText = _list[index].content;
     showform("#arc_view");
   }
+  function edArc(index){
+
+  }
 
   let delArc = async function(index){
-    return;
-    let d = await Sync.post("/server/article/delete_cate",{id:1});
-    console.log(d);
-    if(d && d.code == 200){
-      alert(d.msg);
-      location.reload();
+    if(confirm("确定删除文章？")){
+      let d = await Sync.ajax({url:"/api/article/del_article",data:{id:_list[index]._id},type:'POST'});
+      console.log(d);
+      if(d && d.code == 200){
+        alert(d.msg);
+        location.reload();
+      }
     }
   }
 </script>

@@ -164,18 +164,26 @@ class ArticleController {
    // 编辑文章
   static async article_put(ctx) {
    const { id } = ctx.request.body;
+   // const result = await CategoryModel.findByIdAndUpdate(cateid,{cate_name,cate_info,cate_parent});
+   // ctx.redirect('back');
+   // if(result) return ctx.success({msg:'编辑成功'})
+   // else return ctx.error({msg:'编辑时出错',status:400})
    return ctx.success({ msg:'待开发' });
   }
 
    // 删除文章
   static async del_article(ctx) {
-   const { id } = ctx.query;
-   return ctx.success({ msg:'待开发' });
+   const { id } = ctx.request.body;
+   if(!id) return ctx.error({msg:'未提交id值',status:400})
+   const result = await ArticleModel.findByIdAndRemove(id);
+   if(result) return ctx.success({msg:'删除成功'})
+   else return ctx.error({msg:'删除时出错',status:400})
   }
 
    // 删除评论
   static async del_comment(ctx) {
-   const { id } = ctx.query;
+   const { id } = ctx.request.body;
+   if(!id) return ctx.error({msg:'未提交id值',status:400})
    return ctx.success({ msg:'待开发' });
   }
 

@@ -41,7 +41,8 @@ class BackendMain {
     const totals = await [TopCategoryModel, CategoryModel][index].count();
     if(totals > 0) page_length = Math.ceil(totals/limit);
     const data = await [TopCategoryModel, CategoryModel][index].find().skip(skip).limit(limit).populate('cate_parent');
-    const tcate = await TopCategoryModel.find();
+    let tcate = data;
+    if(index != 0) tcate = await TopCategoryModel.find();
 
     return ctx.render(type, {
       data,
@@ -74,7 +75,10 @@ class BackendMain {
     const skip = (page-1)*pageSize;
     const totals = await ArticleModel.find({}).count();
     if(totals > 0) page_length = Math.ceil(totals/pageSize);
-    const list = await ArticleModel.find({}).sort({createdAt:'-1',review:'-1'}).skip(Number(skip)).limit(pageSize).populate('author',{ name:1,avatar:1,nickname:1 }).populate('comments');
+    const list = await ArticleModel.find({}).sort({createdAt:'-1',review:'-1'}).skip(Number(skip)).limit(pageSize).populate('author',{ name:1,avatar:1,nickname:1 }).populate('categoryId').populate('comments');
+
+    let category = await TopCategoryModel.find().skip(0).limit(15);
+
     return ctx.render(type, {
       message:'文章管理',
       type,
@@ -85,6 +89,7 @@ class BackendMain {
       page,
       totals,
       page_length,
+      category,
       menu:menu[type]
     });
   }
